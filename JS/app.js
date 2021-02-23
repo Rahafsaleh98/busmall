@@ -1,5 +1,6 @@
 'use strict'
-let picturesContiner = document.getElementById('pictures')
+let picturesContiner = document.getElementById('pictures')   // id that contines every picture
+
 let firstImge=document.getElementById('frstPicture');         // in oeder to make render "step3"
 let secondImg=document.getElementById('SecondPicture');
 let lastImg=document.getElementById('lastPicture');
