@@ -1,7 +1,7 @@
 'use strict'
 let continers = document.getElementById('pictures');
 
-let firstImge = document.getElementById('frstPicture');         // in oeder to make render "step3"
+let firstImge = document.getElementById('frstPicture');         // in order to make render "step3"
 let secondImg = document.getElementById('SecondPicture');
 let lastImg = document.getElementById('lastPicture');
 
