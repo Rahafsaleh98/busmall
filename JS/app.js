@@ -1,11 +1,4 @@
 'use strict'
-<<<<<<< HEAD
-let picturesContiner = document.getElementById('pictures')   // id that contines every picture
-
-let firstImge=document.getElementById('frstPicture');         // in oeder to make render "step3"
-let secondImg=document.getElementById('SecondPicture');
-let lastImg=document.getElementById('lastPicture');
-=======
 let continers = document.getElementById('pictures');
 
 let firstImge = document.getElementById('frstPicture');         // in order to make render "step3"
@@ -13,7 +6,6 @@ let secondImg = document.getElementById('SecondPicture');
 let lastImg = document.getElementById('lastPicture');
 
 
->>>>>>> b575aad48c1e4078a1ace3e0df4f7f97fd17e14a
 let firstImgeIndex;
 let secondImgIndex;
 let lastImgIndex;
@@ -113,14 +105,11 @@ function click(event) {
 
     } else {
         /*let list = document.getElementById('results');
-
         let result;
         for (let i = 0; i < Products.allImages.length; i++) {
             result = document.createElement('li')
             list.appendChild(result)
             result.textContent = Products.allImages[i].name + ' had ' + Products.allImages[i].vote + ' vote, and was seen ' + Products.allImages[i].shown + ' times ';
-
-
         }*/
         /*let btn = document.createElement('button')
         list.appendChild(btn);
