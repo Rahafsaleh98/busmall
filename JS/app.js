@@ -58,6 +58,8 @@ new Products('usb', 'imges/usb.gif');
 new Products('water-can', 'imges/water-can.jpg');
 new Products('wine-glass', 'imges/wine-glass.jpg');
 
+
+
 //console.log(Products.allImages);
 
 
@@ -162,15 +164,15 @@ viewChart();
   
           {
             label: ' product votes',
-            backgroundColor: '#e97878',
-            borderColor: '#e97878',
+            backgroundColor: '#9a8194',
+            borderColor: '#9a8194',
             data: productVote
           },
           
           {
             label: ' product shown',
-            backgroundColor: '#f5d782',
-            borderColor: '#f5d782',
+            backgroundColor: '#822659',
+            borderColor: '#822659',
             data: productShown
           },
      
