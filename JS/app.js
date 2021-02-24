@@ -18,7 +18,7 @@ let productName = [];
 let productVote = [];
 let productShown = [];
 
-
+let Imges= []; 
 
 function Products(name, source) {    //step 1
     this.name = name
@@ -30,8 +30,13 @@ function Products(name, source) {    //step 1
 }
 
 
-
 Products.allImages = [];
+
+function setItems() {
+  let data = JSON.stringify(Products.allImages);
+  localStorage.setItem('product' , data);
+
+}
 
 new Products('banana', 'imges/banana.jpg');
 new Products('bathroom', 'imges/bathroom.jpg');
@@ -60,20 +65,23 @@ function randomlyGenerate() {                    // step 2
     return Math.floor(Math.random() * Products.allImages.length);
 }
 
+function getItems() {
+  let srtringObject = localStorage.getItem('product')
+  if (srtringObject) {
+    Products.allImages = JSON.parse(srtringObject)
+  }
+}
 
 
 function renderThreeImages() {
-    firstImgeIndex = randomlyGenerate();
 
     do {
-        lastImgIndex = randomlyGenerate();
-    } while
-        (firstImgeIndex === lastImgIndex)
+      firstImgeIndex = randomlyGenerate();
+      secondImgIndex= randomlyGenerate();
+      lastImgIndex = randomlyGenerate();
 
-    do {
-        secondImgIndex = randomlyGenerate();
 
-    } while (lastImgIndex === secondImgIndex || secondImgIndex === firstImgeIndex)
+    } while ((firstImgeIndex === secondImgIndex) || (secondImgIndex ===lastImgIndex) || (firstImgeIndex ===lastImgIndex) || Imges.includes(firstImgeIndex) || Imges.includes(secondImgIndex) || Imges.includes(lastImgIndex))
 
     firstImge.src = Products.allImages[firstImgeIndex].source;
     Products.allImages[firstImgeIndex].shown++
@@ -84,6 +92,8 @@ function renderThreeImages() {
     lastImg.src = Products.allImages[lastImgIndex].source;
     Products.allImages[lastImgIndex].shown++
 
+
+    Imges = [firstImgeIndex, secondImgIndex, lastImgIndex]
 }
 renderThreeImages();
 
@@ -96,10 +106,16 @@ function click(event) {
     if (numberOfAttampts <= maxAttempts) {
         if (event.target.id === 'frstPicture') {
             Products.allImages[firstImgeIndex].vote++
+            setItems()
+            
         } else if (event.target.id = 'SecondPicture') {
             Products.allImages[secondImgIndex].vote++
+            setItems()
+            
         } else {
             Products.allImages[lastImgIndex].vote++
+            setItems()
+
         }
         renderThreeImages();
 
@@ -168,5 +184,5 @@ viewChart();
     
     }); 
   }
-
-  console.log(chart);
+  getItems()
+ // console.log(chart);
