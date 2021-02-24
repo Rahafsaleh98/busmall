@@ -1,11 +1,4 @@
 'use strict'
-<<<<<<< HEAD
-let picturesContiner = document.getElementById('pictures')   // id that contines every picture
-
-let firstImge=document.getElementById('frstPicture');         // in oeder to make render "step3"
-let secondImg=document.getElementById('SecondPicture');
-let lastImg=document.getElementById('lastPicture');
-=======
 let continers = document.getElementById('pictures');
 
 let firstImge = document.getElementById('frstPicture');         // in order to make render "step3"
@@ -13,7 +6,6 @@ let secondImg = document.getElementById('SecondPicture');
 let lastImg = document.getElementById('lastPicture');
 
 
->>>>>>> b575aad48c1e4078a1ace3e0df4f7f97fd17e14a
 let firstImgeIndex;
 let secondImgIndex;
 let lastImgIndex;
@@ -26,7 +18,7 @@ let productName = [];
 let productVote = [];
 let productShown = [];
 
-
+let Imges= []; 
 
 function Products(name, source) {    //step 1
     this.name = name
@@ -38,8 +30,13 @@ function Products(name, source) {    //step 1
 }
 
 
-
 Products.allImages = [];
+
+function setItems() {
+  let data = JSON.stringify(Products.allImages);
+  localStorage.setItem('product' , data);
+
+}
 
 new Products('banana', 'imges/banana.jpg');
 new Products('bathroom', 'imges/bathroom.jpg');
@@ -68,20 +65,23 @@ function randomlyGenerate() {                    // step 2
     return Math.floor(Math.random() * Products.allImages.length);
 }
 
+function getItems() {
+  let srtringObject = localStorage.getItem('product')
+  if (srtringObject) {
+    Products.allImages = JSON.parse(srtringObject)
+  }
+}
 
 
 function renderThreeImages() {
-    firstImgeIndex = randomlyGenerate();
 
     do {
-        lastImgIndex = randomlyGenerate();
-    } while
-        (firstImgeIndex === lastImgIndex)
+      firstImgeIndex = randomlyGenerate();
+      secondImgIndex= randomlyGenerate();
+      lastImgIndex = randomlyGenerate();
 
-    do {
-        secondImgIndex = randomlyGenerate();
 
-    } while (lastImgIndex === secondImgIndex || secondImgIndex === firstImgeIndex)
+    } while ((firstImgeIndex === secondImgIndex) || (secondImgIndex ===lastImgIndex) || (firstImgeIndex ===lastImgIndex) || Imges.includes(firstImgeIndex) || Imges.includes(secondImgIndex) || Imges.includes(lastImgIndex))
 
     firstImge.src = Products.allImages[firstImgeIndex].source;
     Products.allImages[firstImgeIndex].shown++
@@ -92,6 +92,8 @@ function renderThreeImages() {
     lastImg.src = Products.allImages[lastImgIndex].source;
     Products.allImages[lastImgIndex].shown++
 
+
+    Imges = [firstImgeIndex, secondImgIndex, lastImgIndex]
 }
 renderThreeImages();
 
@@ -104,23 +106,26 @@ function click(event) {
     if (numberOfAttampts <= maxAttempts) {
         if (event.target.id === 'frstPicture') {
             Products.allImages[firstImgeIndex].vote++
+            setItems()
+            
         } else if (event.target.id = 'SecondPicture') {
             Products.allImages[secondImgIndex].vote++
+            setItems()
+            
         } else {
             Products.allImages[lastImgIndex].vote++
+            setItems()
+
         }
         renderThreeImages();
 
     } else {
         /*let list = document.getElementById('results');
-
         let result;
         for (let i = 0; i < Products.allImages.length; i++) {
             result = document.createElement('li')
             list.appendChild(result)
             result.textContent = Products.allImages[i].name + ' had ' + Products.allImages[i].vote + ' vote, and was seen ' + Products.allImages[i].shown + ' times ';
-
-
         }*/
         /*let btn = document.createElement('button')
         list.appendChild(btn);
@@ -179,5 +184,5 @@ viewChart();
     
     }); 
   }
-
-  console.log(chart);
+  getItems()
+ // console.log(chart);
